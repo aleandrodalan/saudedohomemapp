@@ -1,0 +1,143 @@
+<nav class="navbar navbar-expand-md navbar-top">
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <h4>
+                    <i class="oi oi-document"></i>		                	
+                    <label>Lista de Prontuários</label>
+                </h4>
+            </li>
+        </ul>
+    </div>
+    <a class="btn btn-outline-dark"
+       routerLink="/prontuarios/form" 
+       role="button">
+       <span class="oi oi-pencil" 
+             title="Cadastro" 
+             aria-hidden="true">
+       </span>
+       <span>Cadastrar Prontuário</span>
+    </a>
+</nav>
+
+<div class="container" id="listagem" style="padding-bottom: 20px;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-success" role="alert" *ngIf="messageSuccess">
+                {{messageSuccess}}
+            </div>
+
+            <div class="alert alert-danger" role="alert" *ngIf="messageError">
+                {{messageError}}
+            </div>                
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <form method="GET" 
+              class="form-horizontal"
+              (ngSubmit)="buscarProntuarioPorNomePaciente(nomeInput.value)">
+            <div class="form-group">
+                <div class="col-sm-6">
+                    <div class="input-group mb-3">
+                        <input class="form-control" 
+                               placeholder="Digite o nome do Paciente para a pesquisa" 
+                               #nomeInput
+                               name="nome" />
+                        <div class="input-group-append">
+                            <button type="submit" 
+                                    class="btn btn-outline-secondary">
+                                <span class="oi oi-magnifying-glass">
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    
+        <table class="table table-striped table-hover table-sm">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Paciente</th>
+                    <th>Unidade de Saúde</th>
+                    <th>Data de Coleta</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="prontuarios == null">
+                    <td colspan="5">Nenhum registro encontrado.</td>
+                </tr>
+                <tr *ngFor="let prontuario of prontuarios | paginate: {itemsPerPage: contador, currentPage: paginaAtual}">
+                    <td>{{prontuario.id}}</td>
+                    <td>{{prontuario.paciente.pessoa.nome}}</td>
+                    <td>{{prontuario.unidadeSaude.nome}}</td>
+                    <td>{{prontuario.dataColeta}}</td>
+                    
+                    <td colspan="2">
+                        <a class="btn btn-sm btn-outline-dark border-0" 
+                           routerLink="/prontuarios/form/{{prontuario.id}}">
+                           <span class="oi oi-brush" 
+                                title="Editar" 
+                                aria-hidden="true">
+                           </span>
+                        </a>
+                        
+                        <a class="btn btn-sm btn-outline-dark border-0"
+                           data-toggle="modal"
+                           data-target="#modalDelecao"
+                           (click)="preparaExclusao(prontuario)">
+                           <span class="oi oi-trash"
+                                 title="Exclusão" 
+                                 aria-hidden="true">
+                           </span>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="text-center">
+        <pagination-controls 
+            (pageChange)="paginaAtual = $event" 
+            previousLabel="Anterior" 
+            nextLabel="Próximo"
+            autoHide="true" 
+            responsive="true" >
+        </pagination-controls>
+    </div>
+
+    <div id="modalDelecao" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" 
+                    style="background-image: linear-gradient(60deg, #2E8B57, #90EE90);">
+    
+                    <h4 class="modal-title text-white">Atenção</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body" *ngIf="prontuarioSelecionado">
+                    Deseja realmente excluir prontuário de <label>{{prontuarioSelecionado.paciente.pessoa.nome}}</label>?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" 
+                            class="btn text-white"
+                            style="background-image: linear-gradient(60deg, #DC143C, #F08080);"
+                            data-dismiss="modal">
+                        Cancelar
+                    </button>
+                    <button type="submit" 
+                            class="btn text-white" 
+                            (click)="excluirProntuario()"
+                            data-dismiss="modal"
+                            style="background-image: linear-gradient(60deg, #2E8B57, #90EE90);">
+                        Confirmar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

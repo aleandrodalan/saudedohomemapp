@@ -1,0 +1,82 @@
+<div>
+    <div>
+        <label class="required">Qual destes motivos explica melhor o porquê não procurou por atendimento?</label>
+    </div>
+    <div>
+        <div>
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()"            
+                   id="opcaoNaoProcAtendNaoSabiaAondeIr"
+                   name="opcaoNaoProcAtendNaoSabiaAondeIr"
+                   [(ngModel)]="motivoNaoProcurarAtendimento.naoSabiaOndeIr" />
+            <span>Não sabia aonde ir</span>
+        </div>
+        <div>			  				
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()"            
+                   id="opcaoNaoTinhaDinheiroTransp"
+                   name="opcaoNaoTinhaDinheiroTransp" 
+                   [(ngModel)]="motivoNaoProcurarAtendimento.naoTinhaDinheiroTransporte" />
+            <span>Não tinha dinheiro para o transporte</span>
+        </div>
+        <div>
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()"            
+                   id="opcaoNaoTinhaDinheiroConsulta"
+                   name="opcaoNaoTinhaDinheiroConsulta" 
+                   [(ngModel)]="motivoNaoProcurarAtendimento.naoTinhaDinheiroConsulta" />
+            <span>Não tinha dinheiro para a consulta</span>
+        </div>
+        <div>
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()"            
+                   id="opcaoNaoPodiaAusentarTrabalho"
+                   name="opcaoNaoPodiaAusentarTrabalho" 
+                   [(ngModel)]="motivoNaoProcurarAtendimento.naoPodiaAusentarTrabalho" />
+            <span>Não podia se ausentar do trabalho</span>
+        </div>
+        <div>
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()"            
+                   id="opcaoNaoFoiAtendVezAnterior"
+                   name="opcaoNaoFoiAtendVezAnterior"
+                   [(ngModel)]="motivoNaoProcurarAtendimento.naoFoiAtendidoVezAnterior" />
+            <span>Não foi atendido da vez anterior</span>
+        </div>
+        <div>
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()"            
+                   id="opcaoFoiMalAtendOutraVez" 
+                   name="opcaoFoiMalAtendOutraVez"
+                   [(ngModel)]="motivoNaoProcurarAtendimento.foiMalAtendidoOutrasVezes" />
+            <span>Foi mal atendido outra(s) vez(es)</span>
+        </div>
+        <div>
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()"
+                   id="opcaoNaoAchouImportNaoPrec"
+                   name="opcaoNaoAchouImportNaoPrec" 
+                   [(ngModel)]="motivoNaoProcurarAtendimento.naoAchouImportante" />
+            <span>Não achou importante/não precisava</span>
+        </div>			
+        <div>
+            <input type="checkbox"
+                   (click)="marcarOutro()" 
+                   id="opcaoOutroMotivoNaoProcAtend" 
+                   name="opcaoOutroMotivoNaoProcAtend"
+                   [(ngModel)]="motivoNaoProcurarAtendimento.outroMotivoNaoProcAten" />
+            <span>Outro</span>
+        </div>		
+        <div *ngIf="motivoNaoProcurarAtendimento.outroMotivoNaoProcAten == true">
+            <div>	
+                <span><strong>Qual?</strong></span>
+            </div>
+            <div>
+                <input type="text" 
+                       id="opcaoOutroMotivoNaoProcAtendOutroQual"
+                       name="opcaoOutroMotivoNaoProcAtendOutroQual"
+                       [(ngModel)]="motivoNaoProcurarAtendimento.outroMotivo" />
+            </div>
+        </div>
+    </div>
+</div>

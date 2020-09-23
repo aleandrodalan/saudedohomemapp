@@ -1,0 +1,54 @@
+<div>
+    <div>
+        <strong><span>Já sofreu algum tipo de violência?</span></strong>				  		
+    </div>
+
+    <input type="radio" 
+           id="opcaoViolenciaSim"
+           name="opcaoViolencia"
+           [value]="true" 
+           [(ngModel)]="violencia.sofreuViolencia" />
+    <span>Sim</span>
+
+    <input type="radio" 
+           id="opcaoViolenciaNao"
+           name="opcaoViolencia"
+           (click)="marcarNao()"
+           [value]="false" 
+           [(ngModel)]="violencia.sofreuViolencia" />
+    <span>Não</span>
+</div>			  		
+
+<div id="divQualTipo" *ngIf="violencia.sofreuViolencia == true">
+    <div>
+        <label>Qual tipo?</label>
+    </div>
+    <div>
+        <input type="checkbox" 
+               id="psicologica"
+               name="psicologica" 
+               [(ngModel)]="violencia.violenciaPsicologica" />
+        <span>Psicológica</span>
+    </div>
+    <div>		
+        <input type="checkbox" 
+               id="fisica"
+               name="fisica" 
+               [(ngModel)]="violencia.violenciaFisica" />
+        <span>Física</span>
+    </div>
+    <div>
+        <input type="checkbox" 
+               id="sexual"
+               name="sexual" 
+               [(ngModel)]="violencia.violenciaSexual" />
+        <span>Sexual</span>
+    </div>
+    <div>	
+        <input type="checkbox" 
+               id="todas"
+               name="todas"
+               [(ngModel)]="violencia.violenciaTodas" />
+        <span>Todas</span>			  			
+    </div>
+</div>

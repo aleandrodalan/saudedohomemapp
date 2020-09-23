@@ -1,0 +1,45 @@
+<div>
+    <strong><span>É tabagista?</span></strong>				  		
+</div>
+<div>
+    <input type="radio" 
+           name="ehTabagista" 
+           (click)="marcarSim()"
+           [value]="true"
+           [(ngModel)]="tabagismo.ehTabagista">
+    <span>Sim</span>
+
+    <input type="radio" 
+           name="ehTabagista"
+           [value]="false" 
+           [(ngModel)]="tabagismo.ehTabagista" >
+    <span>Não</span>
+</div>
+<div id="divQuantoTempo" *ngIf="tabagismo.ehTabagista == true">
+    <div>
+        <label>Há quanto tempo?</label>
+    </div>
+    <div>				  		
+        <input type="text" 
+               name="quantoTempoTabagismo"
+               [(ngModel)]="tabagismo.tempoTabagista" >
+    </div>
+</div>
+<div id="divVontadeParar" *ngIf="tabagismo.ehTabagista == true">
+    <div>
+        <label>Tem vontade de parar?</label>
+    </div>
+    <div>	
+        <input type="radio" 
+               name="opcaoVontadeParar"
+               [value]="true" 
+               [(ngModel)]="tabagismo.temVontadePararTabagismo" >
+        <span>Sim</span>
+
+        <input type="radio" 
+               name="opcaoVontadeParar"
+               [value]="false"
+               [(ngModel)]="tabagismo.temVontadePararTabagismo">
+        <span>Não</span>
+    </div>	
+</div>

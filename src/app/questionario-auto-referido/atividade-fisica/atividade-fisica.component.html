@@ -1,0 +1,55 @@
+<div>
+    <strong><span>Pratica alguma atividade física?</span></strong>				  		
+</div>
+<div>
+    <input type="radio" 
+           id="opcaoAtividadeFisicaSim"
+           name="opcaoAtividadeFisica"
+           [value]="true" 
+           [(ngModel)]="atividadeFisica.praticaAtividadeFisica" >
+    <span>Sim</span>
+
+    <input type="radio" 
+           id="opcaoAtividadeFisicaNao" 
+           name="opcaoAtividadeFisica"
+           (click)="marcarNao()"
+           [value]="false" 
+           [(ngModel)]="atividadeFisica.praticaAtividadeFisica" >
+    <span>Não</span>
+</div>
+<div id="divFrequenciaAtividadeFisica" *ngIf="atividadeFisica.praticaAtividadeFisica == true">
+    <strong><span>Com que freqüência pratica atividades físicas?</span></strong>
+
+    <div>
+        <input type="radio" 
+               id="opcaoFrequencia"
+               name="opcaoFrequencia" 
+               value="UMA_VEZ_SEMANA" 
+               [(ngModel)]="atividadeFisica.frequenciaAtividadeFisica" >
+        <span>1x por semana</span>
+    </div>
+    <div>					
+        <input type="radio" 
+               id="opcaoFrequencia"
+               name="opcaoFrequencia" 
+               value="DUAS_VEZ_SEMANA" 
+               [(ngModel)]="atividadeFisica.frequenciaAtividadeFisica" >
+        <span>2x por semana</span>
+    </div>
+    <div>			
+        <input type="radio" 
+               id="opcaoFrequencia"
+               name="opcaoFrequencia" 
+               value="TRES_VEZ_SEMANA" 
+               [(ngModel)]="atividadeFisica.frequenciaAtividadeFisica" >
+        <span>3x por semana</span>
+    </div>
+    <div>			
+        <input type="radio" 
+               id="opcaoFrequencia"
+               name="opcaoFrequencia" 
+               value="QUATRO_OU_MAIS_VEZES_SEMANA" 
+               [(ngModel)]="atividadeFisica.frequenciaAtividadeFisica" >
+        <span>4x ou mais por semana</span>
+    </div>
+</div>

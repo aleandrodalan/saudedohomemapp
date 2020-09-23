@@ -1,0 +1,58 @@
+<div>
+    <div>
+        <label>Gostaria que tivesse horário diferenciado para o atendimento?</label>				  		
+    </div>
+    <div>
+        <input type="radio" 
+               id="opcaoHorarioDiferenciadoSim"
+               name="opcaoHorarioDiferenciado" 
+               [value]="true" 
+               [(ngModel)]="horarioDiferenciadoAtendimento.gostariaTivesseHorarioDiferenciadoAtend" >
+        <span>Sim</span>
+
+        <input type="radio" 
+               id="opcaoHorarioDiferenciadoNao"
+               name="opcaoHorarioDiferenciado"
+               (click)="marcarNao()"
+               [value]="false" 
+               [(ngModel)]="horarioDiferenciadoAtendimento.gostariaTivesseHorarioDiferenciadoAtend" >
+        <span>Não</span>
+    </div>
+    <div id="divQualPeriodo" *ngIf="horarioDiferenciadoAtendimento.gostariaTivesseHorarioDiferenciadoAtend == true">
+        <div>
+            <label>Qual período?</label>
+        </div>
+        <div>
+            <input type="radio" 
+                   id="opcaoQualPeriodo"
+                   name="opcaoQualPeriodo"
+                   value="MATUTINO"
+                   [(ngModel)]="horarioDiferenciadoAtendimento.periodoAtendimento" />
+            <span>Matutino</span>
+        </div>
+        <div>
+            <input type="radio" 
+                   id="opcaoQualPeriodo"
+                   name="opcaoQualPeriodo" 
+                   value="VESPERTINO" 
+                   [(ngModel)]="horarioDiferenciadoAtendimento.periodoAtendimento" />
+            <span>Vespertino</span>
+        </div>
+        <div>
+            <input type="radio" 
+                   id="opcaoQualPeriodo"
+                   name="opcaoQualPeriodo"
+                   value="NOTURNO" 
+                   [(ngModel)]="horarioDiferenciadoAtendimento.periodoAtendimento" />
+            <span>Noturno</span>
+        </div>
+        <div>
+            <input type="radio" 
+                   id="opcaoQualPeriodo"
+                   name="opcaoQualPeriodo"
+                   value="SABADO" 
+                   [(ngModel)]="horarioDiferenciadoAtendimento.periodoAtendimento" />
+            <span>Sábado</span>
+        </div>
+    </div>		
+</div>

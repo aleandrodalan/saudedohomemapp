@@ -1,0 +1,78 @@
+<div id="externa">
+    <div id="interna" class="p-3 mb-5 bg-white rounded col-sm-9 col-md-7 col-lg-4 mx-auto">
+
+        <div class="alert alert-danger"
+                *ngIf="loginError">
+            Usuario/senha inválidos!
+        </div>
+
+        <div class="alert alert-info"
+                *ngIf="loginDesconectado">
+            Usuario desconectado!
+        </div>
+
+        <div id="conteudo" class="card border-0">
+            <div style="text-align: center;">
+                <img alt="Cuiabá" src="assets/images/logo_cuiaba.png"
+                    width="225px" height="100px" >
+            </div>
+
+            <h5 class="card-header bg-transparent text-black text-center border-dark">
+                <strong>GS - Saúde do Homem</strong>
+            </h5>
+            <div class="card-body">
+                <form #loginForm="ngForm">
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text text-white border-dark"
+                                    style="background-image: linear-gradient(60deg, #2E8B57, #90EE90);">
+                                <i class="oi oi-person"></i>
+                            </span>
+                        </div>
+
+                        <input class="form-control border-dark"
+                            type="text"
+                            name="login"
+                            [(ngModel)]="user.login"
+                            placeholder="Usuário"/>
+                    </div>
+
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-dark text-white border-dark"
+                                    style="background-image: linear-gradient(60deg, #2E8B57, #90EE90);">
+                                <i class="oi oi-key"></i>
+                            </span>
+                        </div>
+
+                        <input class="form-control border-dark"
+                            type="password"
+                            name="password"
+                            [(ngModel)]="user.senha"
+                            placeholder="Senha"/>
+                    </div>
+
+                    <div class="form-group card-footer bg-transparent border-dark">
+                        <button type="submit"
+                                class="btn btn-outline-dark btn-block float-right login_btn"
+                                (click)="onSubmit()" >
+                            <span class="oi oi-account-login"></span>
+                            <strong> Acessar</strong>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="text-center bg-transparent card-footer border-dark">
+                <span style="font-size: large;">Log Lab Inteligência Digital</span><br>
+                <span style="font-size: 80%;">www.loglabdigital.com.br</span><br>
+                <span style="font-size: 80%;">Para suporte e abertura de chamados utilize o link Suporte</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Chat do Movidesk -->
+<!-- <script type="text/javascript">var mdChatClient="031018C1834543CA8CE1C8A93439B754";</script> -->
+<!-- <script src="https://chat.movidesk.com/Scripts/chat-widget.min.js"></script> -->
+<!-- Chat do Movidesk fim -->

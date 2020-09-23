@@ -1,0 +1,144 @@
+<nav class="navbar navbar-expand-md navbar-top">
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <h4>
+                    <i class="oi oi-document"></i>		                	
+                    <label>Lista de Pacientes</label>
+                </h4>
+            </li>
+        </ul>
+    </div>
+    <a class="btn btn-outline-dark" 
+       routerLink="/pacientes/form" 
+       role="button">
+       <span class="oi oi-pencil" title="Cadastro" aria-hidden="true"></span>
+       <span>Cadastrar Paciente</span>
+    </a>
+</nav>
+
+<div class="container" id="listagem" style="padding-bottom: 20px;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-success" role="alert" *ngIf="messageSuccess">
+                {{messageSuccess}}
+            </div>
+
+            <div class="alert alert-danger" role="alert" *ngIf="messageError">
+                {{messageError}}
+            </div>                
+        </div>
+    </div>    
+    
+    <div class="table-responsive">
+        <form method="GET" 
+              class="form-horizontal"
+              (ngSubmit)="buscarPacientesPorNome(nomeInput.value)"  
+              th:action="@{/paciente/listarPorNome}">
+
+        <div class="form-group">
+            <div class="col-sm-6">
+                    <div class="input-group mb-3">
+                        <input class="form-control" 
+                                placeholder="Digite o nome do Paciente para a pesquisa"
+                                #nomeInput
+                                name="nome" />
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-outline-secondary">
+                            <span class="oi oi-magnifying-glass"></span>
+                        </button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    
+        <table class="table table-striped table-hover table-sm">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nome</th>
+                    <th>Telefone</th>
+                    <th>Bairro</th>
+                    <th>Cidade</th>
+                    <th>Estado</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="pacientes == null">
+                    <td colspan="7">Nenhum registro encontrado.</td>
+                </tr>
+            
+                <tr *ngFor="let paciente of pacientes | paginate: {itemsPerPage: contador, currentPage: paginaAtual}">
+                    <td>{{paciente.id}}</td>
+                    <td>{{paciente.pessoa.nome}}</td>
+                    <td>{{paciente.pessoa.telefone | mask: '(00) 00000-0000'}}</td>
+                    <td>{{paciente.endereco.bairro}}</td>
+                    <td>{{paciente.endereco.localidade}}</td>
+                    <td>{{paciente.endereco.uf}}</td>
+
+                    <td colspan="2">
+                        <a class="btn btn-sm btn-outline-dark border-0"
+                           routerLink="/pacientes/form/{{paciente.id}}">
+                           <span class="oi oi-brush" 
+                                 title="Editar" 
+                                 aria-hidden="true"></span>
+                        </a>
+                        
+                        <a class="btn btn-sm btn-outline-dark border-0"
+                           role="button" 
+                           data-toggle="modal" 
+                           data-target="#modalDelecao"
+                           (click)="preparaExclusao(paciente)">
+                           <span class="oi oi-trash" 
+                                 title="Exclusão" 
+                                 aria-hidden="true"></span>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="text-center">
+        <pagination-controls 
+            (pageChange)="paginaAtual = $event" 
+            previousLabel="Anterior" 
+            nextLabel="Próximo"
+            autoHide="true" 
+            responsive="true" >
+        </pagination-controls>
+    </div>    
+</div>
+
+<div id="modalDelecao" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" 
+                style="background-image: linear-gradient(60deg, #2E8B57, #90EE90);">
+
+                <h4 class="modal-title text-white">Atenção</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body" *ngIf="pacienteSelecionado">
+                Deseja realmente excluir <label>{{pacienteSelecionado.pessoa.nome}}</label>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" 
+                        class="btn text-white"
+                        style="background-image: linear-gradient(60deg, #DC143C, #F08080);"
+                        data-dismiss="modal">
+                    Cancelar
+                </button>
+                <button type="submit" 
+                        class="btn text-white" 
+                        (click)="excluirPaciente()"
+                        data-dismiss="modal"
+                        style="background-image: linear-gradient(60deg, #2E8B57, #90EE90);">
+                    Confirmar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

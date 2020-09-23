@@ -1,0 +1,58 @@
+<div>
+    <div>
+        <label class="required">Como resolveu/tratou este problema?</label>
+    </div>
+    <div>
+        <div>
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()"
+                   id="opcaoNaoFezNada" 
+                   name="opcaoNaoFezNada"
+                   [(ngModel)]="comoResolveuTratouEsteProblema.naoFezNada" />
+            <span>Não fez nada</span>
+        </div>
+        <div>			  				
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()"            
+                   id="opcaoFalouComFarmPassouRemedio" 
+                   name="opcaoFalouComFarmPassouRemedio" 
+                   [(ngModel)]="comoResolveuTratouEsteProblema.farmaceuticoPassouRemedio" />
+            <span>Falou com o farmacêutico, que passou remédio</span>
+        </div>
+        <div>
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()"            
+                   id="opcaoTomouRemedioCaseiro" 
+                   name="opcaoTomouRemedioCaseiro" 
+                   [(ngModel)]="comoResolveuTratouEsteProblema.tomouRemedioCaseiro" />
+            <span>Tomou remédio caseiro</span>
+        </div>
+        <div>
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()"            
+                   id="opcaoTomouRemedioTinhaCasa" 
+                   name="opcaoTomouRemedioTinhaCasa" 
+                   [(ngModel)]="comoResolveuTratouEsteProblema.tomouRemedioTinhaCasa" />
+            <span>Tomou remédio que já tinha em casa ou pegou com um amigo/parente</span>
+        </div>
+        <div>
+            <input type="checkbox"
+                   (click)="marcarOutro()"
+                   id="opcaoOutroComoTratouProblema" 
+                   name="opcaoOutroComoTratouProblema" 
+                   [(ngModel)]="comoResolveuTratouEsteProblema.outroComoTratouProblema" />
+            <span>Outro</span>
+        </div>		
+        <div *ngIf="comoResolveuTratouEsteProblema.outroComoTratouProblema == true">
+            <div>	
+                <strong><span>Qual?</span></strong>
+            </div>
+            <div>
+                <input type="text" 
+                       id="opcaoQualOutroComoTratouProblema" 
+                       name="opcaoQualOutroComoTratouProblema" 
+                       [(ngModel)]="comoResolveuTratouEsteProblema.qualOutroComoTratouProblema" />
+            </div>
+        </div>
+    </div>
+</div>

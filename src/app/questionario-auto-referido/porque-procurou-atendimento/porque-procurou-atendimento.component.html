@@ -1,0 +1,156 @@
+<div>
+    <div>
+        <label class="required">Por que procurou atendimento?</label>				  		
+    </div>
+</div>
+<div>
+    <div>
+        <div>
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()"
+                   id="opcaoFebre"
+                   name="opcaoFebre" 
+                   [(ngModel)]="porqueProcurouAtendimento.atendMedFebre" />
+            <span>Febre</span>
+        </div>
+        <div>			  				
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()"
+                   id="opcaoDiarreia"
+                   name="opcaoDiarreia" 
+                   [(ngModel)]="porqueProcurouAtendimento.atendMedDiarreia" />
+            <span>Diarreia</span>
+        </div>
+        <div>
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()"
+                   id="opcaoTosse"
+                   name="opcaoTosse"
+                   [(ngModel)]="porqueProcurouAtendimento.atendMedTosse" />
+            <span>Tosse</span>
+        </div>
+        <div>
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()" 
+                   id="opcaoCurativo" 
+                   name="opcaoCurativo"
+                   [(ngModel)]="porqueProcurouAtendimento.atendMedCurativo" />
+            <span>Curativo</span>
+        </div>
+        <div>
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()"
+                   id="opcaoVacinacao"
+                   name="opcaoVacinacao" 
+                   [(ngModel)]="porqueProcurouAtendimento.atendMedVacinacao" />
+            <span>Vacinação</span>
+        </div>
+        <div>
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()"
+                   id="opcaoConsultaPreNatal" 
+                   name="opcaoConsultaPreNatal"
+                   [(ngModel)]="porqueProcurouAtendimento.atendMedConsultaPreNatal" />
+            <span>Consulta Pré-natal</span>
+        </div>
+        <div>
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()"
+                   id="opcaoHipertensao" 
+                   name="opcaoHipertensao"
+                   [(ngModel)]="porqueProcurouAtendimento.atendMedHipertensao" />
+            <span>Hipertensão</span>
+        </div>
+        <div>			  				
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()"
+                   id="opcaoDiabetes"
+                   name="opcaoDiabetes" 
+                   [(ngModel)]="porqueProcurouAtendimento.atendMedDiabetes" />
+            <span>Diabetes</span>
+        </div>
+        <div>
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()"
+                   id="opcaoTratamentoDentario" 
+                   name="opcaoTratamentoDentario"
+                   [(ngModel)]="porqueProcurouAtendimento.atendMedTratamentoDentario" />
+            <span>Tratamento Dentário</span>
+        </div>
+        <div>
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()"
+                   id="opcaoDorRepentina"
+                   name="opcaoDorRepentina"
+                   [(ngModel)]="porqueProcurouAtendimento.atendMedDorRepentina" />
+            <span>Dor repentina</span>
+        </div>
+        <div>
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()"
+                   id="opcaoFerimentoFratura" 
+                   name=""
+                   [(ngModel)]="porqueProcurouAtendimento.atendMedFerimentoFratura" />
+            <span>Ferimento, fratura</span>
+        </div>
+        <div>
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()"
+                   id="opcaoCheckUpRotina" 
+                   name="opcaoCheckUpRotina" 
+                   [(ngModel)]="porqueProcurouAtendimento.atendMedCheckUpRotina" />
+            <span>Chyeck-up, rotina</span>
+        </div>
+        <div>
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()"
+                   id="opcaoExameAdmissional" 
+                   name="opcaoExameAdmissional"
+                   [(ngModel)]="porqueProcurouAtendimento.atendMedExameAdmissional" />
+            <span>Exame admissional</span>
+        </div>
+        <div>
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()"
+                   id="opcaoProblemaRespiratorio" 
+                   name="opcaoProblemaRespiratorio"
+                   [(ngModel)]="porqueProcurouAtendimento.atendMedProblemaRespiratorio" />
+            <span>Problema respiratório</span>
+        </div>
+        <div>			  				
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()"
+                   id="opcaoSaudeMental"
+                   name="opcaoSaudeMental"
+                   [(ngModel)]="porqueProcurouAtendimento.atendMedSaudeMental" />
+            <span>Saúde mental</span>
+        </div>
+        <div>
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()"
+                   id="opcaoTrocaReceitaMedica"
+                   name="opcaoTrocaReceitaMedica"
+                   [(ngModel)]="porqueProcurouAtendimento.atendMedTrocaReceitaMedica" />
+            <span>Troca de receita médica</span>
+        </div>
+        <div>
+            <input type="checkbox" 
+                   (click)="marcarOutro()"
+                   id="opcaoOutro" 
+                   name="opcaoOutro" 
+                   [(ngModel)]="porqueProcurouAtendimento.atendMedOutro" />
+            <span>Outro</span>
+        </div>
+        <div *ngIf="porqueProcurouAtendimento.atendMedOutro == true">
+            <div>	
+                <strong><span>Qual?</span></strong>
+            </div>
+            <div>
+                <input type="text" 
+                       id="opcaoOutroEscrito"
+                       name="opcaoOutroEscrito" 
+                       [(ngModel)]="porqueProcurouAtendimento.atendMedOutroEscrito" />
+            </div>
+        </div>
+    </div>
+</div>

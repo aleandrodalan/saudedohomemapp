@@ -1,0 +1,30 @@
+<div>
+    <strong><span>Tem histórico familiar de câncer?</span></strong>				  		
+</div>
+<div>
+    <input type="radio" 
+           id="opcaoHistoricoCancerSim"
+           name="opcaoHistoricoCancer"
+           (click)="marcarSim()" 
+           [value]="true" 
+           [(ngModel)]="historicoCancer.historicoFamiliarCancer" >
+    <span>Sim</span>
+
+    <input type="radio" 
+           id="opcaoHistoricoCancerNao" 
+           name="opcaoHistoricoCancer"
+           [value]="false" 
+           [(ngModel)]="historicoCancer.historicoFamiliarCancer" >
+    <span>Não</span>
+</div>
+<div id="divQualHistoricoCancer" *ngIf="historicoCancer.historicoFamiliarCancer == true">
+    <div>
+        <strong><span>Qual tipo?</span></strong>
+    </div>
+    <div>				  		
+        <input type="text" 
+               id="inputQualHistoricoCancer"
+               name="inputQualHistoricoCancer" 
+               [(ngModel)]="historicoCancer.qualTipoCancer" >
+    </div>
+</div>

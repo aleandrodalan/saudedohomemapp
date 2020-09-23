@@ -1,0 +1,542 @@
+<nav class="navbar navbar-expand-md navbar-top">
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <h4>
+                    <i class="oi oi-pencil"></i> 
+                    <label>Cadastro de Prontuário</label>
+                </h4>		                
+            </li>
+        </ul>
+    </div>
+
+    <a class="btn btn-outline-dark" routerLink="/prontuarios/lista" role="button">
+        <span class="oi oi-document" title="Cadastro" aria-hidden="true"></span>
+        <span>Listar Prontuários</span>
+    </a>
+</nav>
+
+<div class="container" id="cadastro" style="padding-bottom: 20px;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-success" role="alert" *ngIf="success == true">
+                Prontuário salvo com sucesso!
+            </div>
+
+            <div class="alert alert-danger" role="alert" *ngFor="let erro of errors">
+                {{erro}}
+            </div>                
+        </div>
+    </div>
+
+    <form #prontuarioForm="ngForm" (ngSubmit)="onSubmit()">
+        
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" 
+                   data-toggle="tab" 
+                   href="#dadosGerais">Dados Gerais</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" 
+                   data-toggle="tab" 
+                   href="#questionario1">Questionário</a>
+            </li>    
+
+            <li class="nav-item">
+                <a class="nav-link" 
+                   data-toggle="tab" 
+                   href="#questionario2">Questionário</a>
+            </li>                
+
+            <li class="nav-item">
+                <a class="nav-link" 
+                   data-toggle="tab" 
+                   href="#questionario3">Questionário</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" 
+                   data-toggle="tab" 
+                   href="#dadosComplementares">Dados Complementares</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" 
+                   data-toggle="tab" 
+                   href="#examesComplementares">Exames Complementares</a>
+            </li>
+        </ul>
+
+        <div class="tab-content" >
+            <div class="tab-pane container fade show active" id="dadosGerais">
+                <div class="form-row">				
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="form-group col-md-9">
+                                <label class="required" 
+                                       style="display: block;" 
+                                       for="paciente">Paciente</label>
+
+                                <p-dropdown [options]="pacientes" 
+                                            [filter]="true"
+                                            placeholder="Selecione" 
+                                            [style]="{'width':'700px'}" 
+                                            [(ngModel)]="prontuario.paciente.id" 
+                                            name="paciente"
+                                            #paciente="ngModel"
+                                            required >
+                                </p-dropdown>
+                            </div>
+                        </div>  
+                                
+                        <div class="form-row">
+                            <div class="form-group col-md-9">
+                                <label class="required" 
+                                       style="display: block;" 
+                                       for="unidadeSaude">Unidade de Saúde</label>
+                                
+                                <p-dropdown [options]="unidadesSaude" 
+                                            [filter]="true"
+                                            placeholder="Selecione" 
+                                            [style]="{'width':'700px'}"
+                                            [(ngModel)]="prontuario.unidadeSaude.id"
+                                            name="unidade"
+                                            #unidade="ngModel"
+                                            required >
+                                </p-dropdown>
+                            </div>
+                        </div> 	
+                    
+                        <div class="form-row">						 	
+                            <div class="form-group col-md-3">
+                                <label>Data de coleta dos dados</label>
+                                <input class="form-control"
+                                        type="text" 
+                                        #dataColeta
+                                        name="dataColeta" 
+                                        readonly="true"
+                                        mask="dd/MM/yyyy HH:mm"
+                                        [(ngModel)]="prontuario.dataColeta" />
+                            </div>
+                        </div>
+                        
+                        <hr>
+                        
+                        <div class="form-row">				    
+                            <div class="form-group col-md-3">
+                                <label class="required" for="peso">Peso (kg)</label>
+                                <input class="form-control" 
+                                       type="text"
+                                       #peso
+                                       name="peso" 
+                                       placeholder="Peso" 
+                                       [(ngModel)]="prontuario.peso"
+                                       currencyMask
+                                       [options]="{prefix: '', thousands: '.', decimal: ','}"
+                                       maxlength="6" />
+                            </div>
+                        
+                            <div class="form-group col-md-3">
+                                <label class="required" for="altura">Altura (mt)</label>
+                                <input type="text" 
+                                        class="form-control" 
+                                        #altura
+                                        name="altura" 
+                                        placeholder="Altura" 
+                                        [(ngModel)]="prontuario.altura"
+                                        (blur)="calcularImc(prontuario.peso, prontuario.altura)" 
+                                        currencyMask
+                                        [options]="{prefix: '', thousands: '.', decimal: ','}"
+                                        maxlength="4" />
+                            </div>
+                            
+                            <div class="form-group col-md-3">
+                                <label for="imc">IMC</label>
+                                <input type="text" 
+                                        class="form-control" 
+                                        #imc 
+                                        name="imc"
+                                        placeholder="IMC" 
+                                        currencyMask
+                                        [options]="{prefix: '', thousands: '.', decimal: ','}"
+                                        [(ngModel)]="prontuario.imc"
+                                        readonly="readonly" />
+                            </div>
+                            
+                            <div class="form-group col-md-3">
+                                <label for="circunferenciaAbdominal">Circunferência Abdominal (cm)</label>
+                                <input type="text" 
+                                        class="form-control" 
+                                        #circunferenciaAbdominal
+                                        name="circunferenciaAbdominal"
+                                        placeholder="Circunferência Abdominal" 
+                                        [(ngModel)]="prontuario.circunferenciaAbdominal"
+                                        maxlength="3" />
+                            </div>				    				    				    
+                        </div>
+                        
+                        <div class="form-row">				    
+                            <div class="form-group col-md-3">
+                                <label for="pressaoArterial">Pressão arterial</label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       name="pressaoArterial"
+                                       #pressaoArterial 
+                                       placeholder="Pressão arterial" 
+                                       [(ngModel)]="prontuario.pressaoArterial"
+                                       maxlength="7" />
+                            </div>
+                        
+                            <div class="form-group col-md-3">
+                                <label for="colesterol">Colesterol (mg/dl)</label>
+                                <input type="text" 
+                                        class="form-control" 
+                                        #colesterol 
+                                        placeholder="Colesterol" 
+                                        name="colesterol"
+                                        [(ngModel)]="prontuario.colesterol"
+                                        maxlength="3" />
+                            </div>           
+                            
+                            <div class="form-group col-md-3">
+                                <label for="tsh">TSH (mU/L)</label>
+                                <input type="text" 
+                                        class="form-control" 
+                                        #tsh 
+                                        name="tsh"
+                                        placeholder="TSH" 
+                                        [(ngModel)]="prontuario.tsh"
+                                        currencyMask
+                                        [options]="{prefix: '', thousands: '.', decimal: ','}"
+                                        maxlength="5" />
+                            </div>
+                            
+                            <div class="form-group col-md-3">
+                                <label for="indiceGlicemico">Índice glicêmico</label>
+                                <input type="text" 
+                                        class="form-control" 
+                                        #indiceGlicemico 
+                                        placeholder="Índice glicêmico" 
+                                        name="indiceGlicemico"
+                                        [(ngModel)]="prontuario.indiceGlicemico" 
+                                        maxlength="3" />
+                            </div>				    				    				    
+                        </div>
+                        
+                        <div class="form-row">				    
+                            <div class="form-group col-md-3">
+                                <label for="frequenciaCardiaca">Frequência cardíaca (bpm)</label>
+                                <input type="text" 
+                                        class="form-control" 
+                                        #frequenciaCardiaca
+                                        placeholder="Frequência cardíaca" 
+                                        [(ngModel)]="prontuario.frequenciaCardiaca"
+                                        name="frequenciaCardiaca"           
+                                        maxlength="3" />
+                            </div>
+                    
+                            <div class="form-group col-md-3">
+                                <label for="frequenciaRespiratoria">Frequência respiratória (irpm)</label>
+                                <input type="text" 
+                                        class="form-control" 
+                                        #frequenciaRespiratoria
+                                        name="frequenciaRespiratoria" 
+                                        placeholder="Frequência respiratória" 
+                                        [(ngModel)]="prontuario.frequenciaRespiratoria" 
+                                        maxlength="3" />
+                            </div>
+                        
+                            <div class="form-group col-md-6">
+                                <div class="col-md-12"  style="padding: 0px;">				    
+                                    <label for="psa">PSA (solicitado em caso de sintomas e sinais)</label>
+                                </div>
+                                        
+                                <div class="col-md-3" style="padding: 0px;">				        
+                                    <input type="text" 
+                                            class="form-control" 
+                                            #psa 
+                                            name="psa"
+                                            placeholder="PSA" 
+                                            [(ngModel)]="prontuario.psa"
+                                            maxlength="3" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="button" 
+                        class="btn btn-outline-dark" 
+                        id="proximoDadosGerais"
+                        (click)="cliqueDadosGerais('questionario1')" >
+                    <span class="oi oi-chevron-right"></span>
+                    <span>Próximo</span>					
+                </button>					  							
+            </div>
+
+            <div class="tab-pane container fade" id="questionario1">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <app-cartao-vacinacao></app-cartao-vacinacao>
+                    </div>
+                    
+                    <div class="form-group col-md-4">
+                        <app-deficiencia></app-deficiencia>
+                    </div>			  		
+                    
+                    <div class="form-group col-md-4">			
+                        <app-alergia></app-alergia>
+                    </div>
+                </div>
+        
+                <div class="form-row">
+                    <div class="form-group col-md-4">					
+                        <app-vasectomia></app-vasectomia>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <app-problemas-renais></app-problemas-renais>
+                    </div>	
+                    <div class="form-group col-md-4">
+                        <app-problemas-respiratorios></app-problemas-respiratorios>
+                    </div>
+                </div>
+        
+                <div class="form-row">				
+                    <div class="form-group col-md-4">	
+                        <app-problemas-gastricos></app-problemas-gastricos>
+                    </div>						
+                    <div class="form-group col-md-4">
+                        <app-consultou-urologista></app-consultou-urologista>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <app-historico-cancer></app-historico-cancer>
+                    </div>
+                </div>					
+        
+                <div class="form-row">
+                    <div class="form-group col-md-4">			
+                        <app-tabagismo></app-tabagismo>
+                    </div>
+                    <div class="form-group col-md-4">	
+                        <app-bebida-alcoolica></app-bebida-alcoolica>
+                    </div>	
+                    <div class="form-group col-md-4">
+                        <app-ultima-vez-proc-aten-saude></app-ultima-vez-proc-aten-saude>
+                    </div>																
+                </div>
+                
+                <hr>
+                <button type="button" 
+                        class="btn btn-outline-dark" 
+                        id="anteriorQuestionario1"
+                        (click)="cliqueDadosGerais('dadosGerais')" >
+                    <span class="oi oi-chevron-left"></span>
+                    <span>Anterior</span>
+                </button>
+                <button type="button" 
+                        class="btn btn-outline-dark" 
+                        id="proximoQuestionario1"
+                        (click)="cliqueDadosGerais('questionario2')" >
+                    <span class="oi oi-chevron-right"></span>
+                    <span>Próximo</span>					
+                </button>					  	
+            </div>	
+
+            <div class="tab-pane container fade" id="questionario2">
+                <div class="form-row">				
+                    <div class="form-group col-md-4">	
+                        <app-porque-procurou-atendimento></app-porque-procurou-atendimento>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <app-algum-prob-saude-nao-proc-atend></app-algum-prob-saude-nao-proc-atend>
+                        <app-motivo-nao-procurar-atendimento></app-motivo-nao-procurar-atendimento>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <app-como-resolveu-tratou-este-problema></app-como-resolveu-tratou-este-problema>
+                        <app-gost-atend-direc-homens-seu-bairro></app-gost-atend-direc-homens-seu-bairro>
+                    </div>						
+                </div>
+        
+                <div class="form-row">
+                    <div class="form-group col-md-4">	
+                        <app-horario-diferenciado-atendimento></app-horario-diferenciado-atendimento>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <app-falar-saude-com-homem-ou-mulher></app-falar-saude-com-homem-ou-mulher>
+                    </div>						
+                    <div class="form-group col-md-4">
+                        <app-violencia></app-violencia>
+                    </div>						
+                </div>
+                
+                <hr>
+                <button type="button" 
+                        class="btn btn-outline-dark" 
+                        id="anteriorQuestionario2"
+                        (click)="cliqueDadosGerais('questionario1')" >
+                    <span class="oi oi-chevron-left"></span>
+                    <span>Anterior</span>
+                </button>
+                <button type="button" 
+                        class="btn btn-outline-dark" 
+                        id="proximoQuestionario2"
+                        (click)="cliqueDadosGerais('questionario3')" >
+                    <span class="oi oi-chevron-right"></span>
+                    <span>Próximo</span>					
+                </button>						
+            </div>
+
+            <div class="tab-pane container fade" id="questionario3">
+                <div class="form-row">
+                    <div class="form-group col-md-4">		
+                        <app-participa-grupo-planej-familiar></app-participa-grupo-planej-familiar>
+                    </div>							
+                    <div class="form-group col-md-4">		
+                        <app-sabia-homem-pode-realizar-consulta-pre-natal></app-sabia-homem-pode-realizar-consulta-pre-natal>
+                    </div>
+                    <div class="form-group col-md-4">		
+                        <app-atividade-fisica></app-atividade-fisica>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">	
+                        <app-quando-consultou-dentista></app-quando-consultou-dentista>
+                    </div>							
+                    <div class="form-group col-md-4">			
+                        <app-teste-rapido-sifilis></app-teste-rapido-sifilis>
+                        <br>
+                        <app-teste-rapido-hepatite></app-teste-rapido-hepatite>
+                        <br>
+                        <app-teste-rapido-hiv></app-teste-rapido-hiv>
+                    </div>
+                    <div class="form-group col-md-4">				
+                        <app-acuidade-visual></app-acuidade-visual>
+                    </div>
+                </div>
+                
+                <hr>
+                <button type="button" 
+                        class="btn btn-outline-dark" 
+                        id="anteriorQuestionario3"
+                        (click)="cliqueDadosGerais('questionario2')" >
+                    <span class="oi oi-chevron-left"></span>
+                    <span>Anterior</span>
+                </button>
+                <button type="button" 
+                        class="btn btn-outline-dark" 
+                        id="proximoQuestionario3"
+                        (click)="cliqueDadosGerais('dadosComplementares')" >
+                    <span class="oi oi-chevron-right"></span>
+                    <span>Próximo</span>					
+                </button>						
+            </div>
+
+            <div class="tab-pane container fade" id="dadosComplementares">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <div>
+                            <input type="checkbox" 
+                                   id="atualizacaoVacina"
+                                   name="atualizacaoVacina"
+                                   [(ngModel)]="prontuario.questionario.atualizacaoVacina" />
+                            <span>Atualização de vacina</span>				  		
+                        </div>
+                        <div>
+                            <input type="checkbox" 
+                                   id="consultaNutricionista"
+                                   name="consultaNutricionista"
+                                   [(ngModel)]="prontuario.questionario.consultaNutricionista" />
+                            <span>Consulta com nutricionista</span>				  		
+                        </div>
+                        <div>
+                            <input type="checkbox" 
+                                   id="consultaOftalmologista"
+                                   name="consultaOftalmologista"
+                                   [(ngModel)]="prontuario.questionario.consultaOftalmologista" />
+                            <span>Consulta com oftalmologista</span>				  		
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Consulta com equipe de saúde da família</label>
+                        <div>
+                            <input type="radio" 
+                                   id="opcaoSaudeFamiliaMedico" 
+                                   value="MEDICO"
+                                   name="consultaEquipeSaudeFamilia"
+                                   (click)="limparMatriciamento()"                                   
+                                   [(ngModel)]="prontuario.questionario.consultaEquipeSaudeFamilia" />
+                            <span>Médico</span>				  		
+                        </div>
+                        <div>
+                            <input type="radio" 
+                                   id="opcaoSaudeFamiliaEnfermeiro" 
+                                   value="ENFERMEIRO"
+                                   name="consultaEquipeSaudeFamilia"
+                                   (click)="limparMatriciamento()"
+                                   [(ngModel)]="prontuario.questionario.consultaEquipeSaudeFamilia" />									
+                            <span>Enfermeiro</span>				  		
+                        </div>
+                        <div>
+                            <input type="radio" 
+                                   id="opcaoSaudeFamiliaNasf" 
+                                   value="NASF" 
+                                   name="consultaEquipeSaudeFamilia"
+                                   [(ngModel)]="prontuario.questionario.consultaEquipeSaudeFamilia" />
+                            <span>NASF:</span>
+                            <div *ngIf="prontuario.questionario.consultaEquipeSaudeFamilia == 'NASF'">
+                                <div>
+                                    <span>Matriciamento:</span>
+                                </div>
+                                <div>
+                                    <input type="text" 
+                                           id="matriciamento"
+                                           name="matriciamento"
+                                           [(ngModel)]="prontuario.questionario.consultaEquipeSaudeFamiliaMatriciamento" />
+                                </div>
+                            </div>				  		
+                        </div>
+                    </div>
+                </div>
+                
+                <hr>
+                <button type="button" 
+                        class="btn btn-outline-dark" 
+                        id="anteriorDadosComplementares"
+                        (click)="cliqueDadosGerais('questionario3')" >
+                    <span class="oi oi-chevron-left"></span>
+                    <span>Anterior</span>
+                </button>
+                <button type="button" 
+                        class="btn btn-outline-dark" 
+                        id="proximoDadosComplementares"
+                        (click)="cliqueDadosGerais('examesComplementares')" >
+                    <span class="oi oi-chevron-right"></span>
+                    <span>Próximo</span>					
+                </button>
+            </div>
+
+            <div class="tab-pane container fade" id="examesComplementares">
+                <div class="form-row">
+                    <app-historico-exames-complementares></app-historico-exames-complementares>
+                </div>
+                
+                <hr>
+                <button type="button" 
+                        class="btn btn-outline-dark" 
+                        id="anteriorExamesComplementares"
+                        (click)="cliqueDadosGerais('dadosComplementares')" >
+                    <span class="oi oi-chevron-left"></span>
+                    <span>Anterior</span>
+                </button>
+                <input type="hidden" id="id" th:field="*{id}"/>
+                <button type="submit" class="btn btn-outline-dark">
+                    <span class="oi oi-check"></span>
+                    <span>Salvar</span>
+                </button>
+            </div>
+        </div>
+    </form>		
+</div>

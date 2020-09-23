@@ -1,0 +1,22 @@
+<div>
+    <label>No último ano, teve algum problema de saúde, como gripe, febre, dor, ferimento, mas não procurou atendimento?</label>				  		
+</div>
+<div>
+    <div>
+        <input type="radio" 
+               id="opcaoAtendMedico" 
+               name="opcaoAtendMedico"
+               [value]="true" 
+               [(ngModel)]="ultimoAnoProblemaSaudeNaoProcurouAtendimento" >
+        <span>Teve algum problema de saúde, mas não procurou atendimento</span>
+    </div>
+
+    <div>
+        <input type="radio" 
+               id="opcaoAtendMedico" 
+               name="opcaoAtendMedico"
+               [value]="false" 
+               [(ngModel)]="ultimoAnoProblemaSaudeNaoProcurouAtendimento" >
+        <span>Não teve problema de saúde</span>
+    </div>
+</div>

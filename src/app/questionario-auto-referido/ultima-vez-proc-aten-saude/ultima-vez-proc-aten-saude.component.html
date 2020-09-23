@@ -1,0 +1,37 @@
+<div>
+    <strong><span>Quando foi a última vez que procurou atendimento de saúde em qualquer local?</span></strong>				  		
+</div>
+<div>
+    <div>
+        <input type="radio" 
+               value="ULTIMOS_TRINTA_DIAS"
+               id="opcaoUltimaVezProcurouAtendMedico"
+               name="opcaoUltimaVezProcurouAtendMedico"
+               [(ngModel)]="procurouAtendSaude" >
+        <span>Nos últimos 30 dias</span>
+    </div>
+    <div>					
+        <input type="radio" 
+               value="ENTRE_UM_MES_E_UM_ANO" 
+               id="opcaoUltimaVezProcurouAtendMedico"
+               name="opcaoUltimaVezProcurouAtendMedico"
+               [(ngModel)]="procurouAtendSaude" >
+        <span>Entre 1 mês e 1 ano</span>
+    </div>
+    <div>			
+        <input type="radio" 
+               value="MAIS_DE_UM_ANO" 
+               id="opcaoUltimaVezProcurouAtendMedico" 
+               name="opcaoUltimaVezProcurouAtendMedico"
+               [(ngModel)]="procurouAtendSaude" >
+        <span>Mais de 1 ano</span>
+    </div>
+    <div>			
+        <input type="radio" 
+               value="NUNCA_PROCUROU" 
+               id="opcaoUltimaVezProcurouAtendMedico" 
+               name="opcaoUltimaVezProcurouAtendMedico"
+               [(ngModel)]="procurouAtendSaude" >
+        <span>Nunca procurou</span>
+    </div>				
+</div>

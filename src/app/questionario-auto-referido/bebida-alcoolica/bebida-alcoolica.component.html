@@ -1,0 +1,47 @@
+<div>
+    <strong><span>Faz uso de bebida alcoólica?</span></strong>				  		
+</div>
+<div>
+    <input type="radio" 
+           id="opcaoAlcoolicoSim"
+           name="opcaoAlcoolico"
+           [value]="true" 
+           [(ngModel)]="bebidaAlcoolica.fazUsoBebidaAlcoolica" >
+    <span>Sim</span>
+
+    <input type="radio" 
+           id="opcaoAlcoolicoNao" 
+           name="opcaoAlcoolico"
+           (click)="marcarNao()"
+           [value]="false" 
+           [(ngModel)]="bebidaAlcoolica.fazUsoBebidaAlcoolica" >
+    <span>Não</span>
+</div>
+<div id="divFrequenciaBebidaAlcoolica" *ngIf="bebidaAlcoolica.fazUsoBebidaAlcoolica == true">
+    <strong><span>Com que frequência ingere bebida alcoólica?</span></strong>				  		
+    
+    <div>
+        <input type="radio" 
+               id="opcaoFrequencia"
+               name="opcaoFrequencia"
+               value="UMA_SEMANA" 
+               [(ngModel)]="bebidaAlcoolica.frequenciaUsoBebidaAlcoolica" >
+        <span>1x por semana</span>
+    </div>
+    <div>					
+        <input type="radio" 
+               id="opcaoFrequencia"
+               name="opcaoFrequencia"
+               value="DUAS_SEMANAS" 
+               [(ngModel)]="bebidaAlcoolica.frequenciaUsoBebidaAlcoolica" >
+        <span>2x por semana</span>
+    </div>
+    <div>			
+        <input type="radio" 
+               id="opcaoFrequencia"
+               name="opcaoFrequencia"
+               value="TRES_SEMANA_OU_MAIS" 
+               [(ngModel)]="bebidaAlcoolica.frequenciaUsoBebidaAlcoolica" >
+        <span>3x ou mais por semana</span>
+    </div>		
+</div>

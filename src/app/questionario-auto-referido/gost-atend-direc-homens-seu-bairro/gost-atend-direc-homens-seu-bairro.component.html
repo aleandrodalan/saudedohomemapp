@@ -1,0 +1,20 @@
+<div>
+    <div>
+        <label>Gostaria que existisse algum atendimento direcionado aos homens na ESF do seu bairro?</label>				  		
+    </div>
+    <div>
+        <input type="radio" 
+               id="opcaoAtendSeuBairroSim" 
+               name="opcaoAtendSeuBairro"
+               [value]="true" 
+               [(ngModel)]="gostAtendDirecHomemSeuBairro" >
+        <span>Sim</span>
+
+        <input type="radio" 
+               id="opcaoAtendSeuBairroNao"
+               name="opcaoAtendSeuBairro" 
+               [value]="false" 
+               [(ngModel)]="gostAtendDirecHomemSeuBairro" >
+        <span>Não</span>
+    </div>
+</div>

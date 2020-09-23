@@ -1,0 +1,45 @@
+<div>
+    <strong><span>Sobre sua Saúde Bucal, quando consultou com dentista pela última vez?</span></strong>				  		
+</div>
+<div>
+    <div>
+        <input type="radio" 
+               value="MENOS_UM_ANO" 
+               id="opcaoConsultouDentistaMenosUm"
+               name="opcaoConsultouDentistaMenosUm" 
+               [(ngModel)]="quandoConsultouDentista" >
+        <span>Há menos de um ano</span>
+    </div>
+    <div>					
+        <input type="radio" 
+               value="UM_E_DOIS_ANOS" 
+               id="opcaoConsultouDentistaUmEMenosDois" 
+               name="opcaoConsultouDentistaUmEMenosDois"
+               [(ngModel)]="quandoConsultouDentista" >
+        <span>Entre 1 ano e menos de 2 anos</span>
+    </div>
+    <div>			
+        <input type="radio" 
+               value="DOIS_E_TRES_ANOS" 
+               id="opcaoConsultouDentistaDoisEMenosTres" 
+               name="opcaoConsultouDentistaDoisEMenosTres"
+               [(ngModel)]="quandoConsultouDentista" >
+        <span>Entre 2 anos e menos de 3 anos</span>
+    </div>
+    <div>			
+        <input type="radio" 
+               value="TRES_OU_MAIS_ANOS" 
+               id="opcaoConsultouDentistaTresOuMais" 
+               name="opcaoConsultouDentistaTresOuMais"
+               [(ngModel)]="quandoConsultouDentista" >
+        <span>3 anos ou mais</span>
+    </div>		
+    <div>			
+        <input type="radio" 
+               value="NUNCA" 
+               id="opcaoConsultouDentistaMenosNunca" 
+               name="opcaoConsultouDentistaMenosNunca"
+               [(ngModel)]="quandoConsultouDentista" >
+        <span>Nunca consultou</span>
+    </div>				
+</div>

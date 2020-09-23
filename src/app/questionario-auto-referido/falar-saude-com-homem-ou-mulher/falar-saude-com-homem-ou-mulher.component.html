@@ -1,0 +1,91 @@
+<div>
+    <div>
+        <label>Sente-se a vontade para falar sobre sua saúde com qualquer profissional da unidade, seja ele homem ou mulher?</label>
+    </div>
+    <div>
+        <input type="radio" 
+               id="opcaoFalarSaudeComHomemMulherSim"
+               name="opcaoFalarSaudeComHomemMulher"
+               (click)="marcarSim()"
+               [value]="true" 
+               [(ngModel)]="falarSaudeComHomemOuMulher.avontadeFalarSaudeComHomemMulher">
+        <span>Sim</span>
+
+        <input type="radio" 
+               id="opcaoFalarSaudeComHomemMulherNao"
+               name="opcaoFalarSaudeComHomemMulher"
+               [value]="false" 
+               [(ngModel)]="falarSaudeComHomemOuMulher.avontadeFalarSaudeComHomemMulher">
+        <span>Não</span>
+    </div>
+    <div id="divPorqueNaoSenteVontadeFalar" *ngIf="falarSaudeComHomemOuMulher.avontadeFalarSaudeComHomemMulher == false">
+        <div>
+            <label>Por que não se sente à vontade para falar sobre sua saúde com qualquer profissional da unidade?</label>				  		
+        </div>
+        <div>
+            <input type="radio" 
+                   (click)="desmarcarOutro()"
+                   id="opcaoAVontadeFalarSaude" 
+                   name="opcaoAVontadeFalarSaude"
+                   value="PREFERE_HOMEM" 
+                   [(ngModel)]="falarSaudeComHomemOuMulher.naoAVontadeFalarSaudeHomemMulherEnum" >
+            <span>Prefiro homem</span>
+        </div>
+        <div>
+            <input type="radio" 
+                   (click)="desmarcarOutro()"            
+                   id="opcaoAVontadeFalarSaude" 
+                   name="opcaoAVontadeFalarSaude"
+                   value="PREFERE_MULHER" 
+                   [(ngModel)]="falarSaudeComHomemOuMulher.naoAVontadeFalarSaudeHomemMulherEnum" >
+            <span>Prefiro mulher</span>
+        </div>
+        <div>
+            <input type="radio" 
+                   (click)="desmarcarOutro()"            
+                   id="opcaoAVontadeFalarSaude" 
+                   name="opcaoAVontadeFalarSaude"
+                   value="TIMIDEZ" 
+                   [(ngModel)]="falarSaudeComHomemOuMulher.naoAVontadeFalarSaudeHomemMulherEnum" >
+            <span>Timidez</span>
+        </div>
+        <div>
+            <input type="radio" 
+                   (click)="desmarcarOutro()"
+                   id="opcaoAVontadeFalarSaude" 
+                   name="opcaoAVontadeFalarSaude"
+                   value="MEDO" 
+                   [(ngModel)]="falarSaudeComHomemOuMulher.naoAVontadeFalarSaudeHomemMulherEnum" >
+            <span>Medo</span>
+        </div>
+        <div>
+            <input type="radio" 
+                   (click)="desmarcarOutro()"            
+                   id="opcaoAVontadeFalarSaude" 
+                   name="opcaoAVontadeFalarSaude"
+                   value="POUCO_TEMPO" 
+                   [(ngModel)]="falarSaudeComHomemOuMulher.naoAVontadeFalarSaudeHomemMulherEnum" >
+            <span>Pouco tempo de consulta</span>
+        </div>
+        <div>
+            <input type="radio" 
+                   (click)="desmarcarOutro()"            
+                   id="opcaoAVontadeFalarSaude" 
+                   name="opcaoAVontadeFalarSaude"
+                   value="OUTRO" 
+                   [(ngModel)]="falarSaudeComHomemOuMulher.naoAVontadeFalarSaudeHomemMulherEnum" >
+            <span>Outro</span>
+        </div>						
+        <div *ngIf="falarSaudeComHomemOuMulher.naoAVontadeFalarSaudeHomemMulherEnum.valueOf() === 'OUTRO'">
+            <div>	
+                <strong><span>Qual?</span></strong>
+            </div>
+            <div>
+                <input type="text" 
+                       id="inputAVontadeFalarSaudeComHomemMulher" 
+                       name="inputAVontadeFalarSaudeComHomemMulher" 
+                       [(ngModel)]="falarSaudeComHomemOuMulher.qualOutroFalarSaude" />
+            </div>
+        </div>
+    </div>
+</div>

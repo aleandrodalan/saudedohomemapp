@@ -1,0 +1,39 @@
+<div>
+    <strong><span>É vasectomizado?</span></strong>				  		
+</div>
+<div>
+    <input type="radio" 
+           id="opcaoVasectomizado" 
+           name="opcaoVasectomizado"
+           (click)="marcarSim()"
+           [value]="true" 
+           [(ngModel)]="vasectomia.vasectomizado" >
+    <span>Sim</span>
+
+    <input type="radio" 
+           id="opcaoVasectomizado"
+           name="opcaoVasectomizado" 
+           [value]="false" 
+           [(ngModel)]="vasectomia.vasectomizado" >
+    <span>Não</span>
+</div>
+<div id="divVasectomizado" *ngIf="vasectomia.vasectomizado == false">
+    <div>
+        <strong><span>Tem interesse?</span></strong>				  		
+    </div>
+    <div>
+        <input type="radio" 
+               id="opcaoVasectomizadoInteresse"
+               name="opcaoVasectomizadoInteresse"
+               [value]="true" 
+               [(ngModel)]="vasectomia.temInteresseVasectomizar" >
+        <span>Sim</span>
+
+        <input type="radio" 
+               id="opcaoVasectomizadoInteresse"
+               name="opcaoVasectomizadoInteresse"
+               [value]="false" 
+               [(ngModel)]="vasectomia.temInteresseVasectomizar" >
+        <span>Não</span>
+    </div>
+</div>

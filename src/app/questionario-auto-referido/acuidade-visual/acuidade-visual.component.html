@@ -1,0 +1,39 @@
+<div>
+    <strong><span>Acuidade visual</span></strong>				  		
+</div>
+<div>
+    <strong><span>Olho direito:</span></strong>
+</div>
+<div>	
+    <input type="radio" 
+           id="opcaoComCorrecaoDireito" 
+           name="opcaoComCorrecaoDireito"
+           [value]="true" 
+           [(ngModel)]="acuidadeVisual.olhoDireitoComCorrecao" >
+    <span>Com correção</span>
+
+    <input type="radio" 
+           id="opcaoComCorrecaoDireito" 
+           name="opcaoComCorrecaoDireito"
+           [value]="false" 
+           [(ngModel)]="acuidadeVisual.olhoDireitoComCorrecao" >
+    <span>Sem correção (Caso use óculos)</span>
+</div>
+<div>
+    <strong><span>Olho esquerdo:</span></strong>
+</div>
+<div>	
+    <input type="radio" 
+           id="opcaoComCorrecaoEsquerdo" 
+           name="opcaoComCorrecaoEsquerdo"
+           [value]="true" 
+           [(ngModel)]="acuidadeVisual.olhoEsquerdoComCorrecao" >
+    <span>Com correção</span>
+
+    <input type="radio" 
+           id="opcaoComCorrecaoEsquerdo" 
+           name="opcaoComCorrecaoEsquerdo"
+           [value]="false" 
+           [(ngModel)]="acuidadeVisual.olhoEsquerdoComCorrecao" >
+    <span>Sem correção (Caso use óculos)</span>
+</div>

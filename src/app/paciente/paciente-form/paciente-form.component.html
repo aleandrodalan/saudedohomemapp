@@ -1,0 +1,372 @@
+<nav class="navbar navbar-expand-md navbar-top">
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <h4>
+                    <i class="oi oi-pencil"></i> 
+                    <label>Cadastro de Pacientes</label>
+                </h4>		                
+            </li>
+        </ul>
+    </div>
+
+    <a class="btn btn-outline-dark" 
+       routerLink="/pacientes/lista" 
+       role="button">
+       <span class="oi oi-document" title="Cadastro" aria-hidden="true"></span>
+       <span>Listar Pacientes</span>
+    </a>		    
+</nav>
+
+<div class="container" id="cadastro" style="padding-bottom: 20px;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-success" role="alert" *ngIf="success == true">
+                Usuário salvo com sucesso!
+            </div>
+
+            <div class="alert alert-danger" role="alert" *ngFor="let erro of errors">
+                {{erro}}
+            </div>                
+        </div>
+    </div>
+    
+    <form #pacienteForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label class="required" for="nome">Nome</label>
+                <input type="text" 
+                       class="form-control" 
+                       placeholder="Nome do paciente" 
+                       autofocus="autofocus"
+                       name="nome"
+                       [(ngModel)]="paciente.pessoa.nome" 
+                />
+                        
+                <div class="invalid-feedback">
+                    <i class="oi oi-warning"></i>
+                    <span>{{paciente.pessoa.nome}}</span>
+                </div> 				        	   
+            </div>
+            
+            <div class="form-group col-md-6">
+                <label for="nomeSocial">Nome Social</label>
+                    <input type="text" 
+                           class="form-control" 
+                           name="nomeSocial"
+                           placeholder="Nome Social do paciente" 
+                           [(ngModel)]="paciente.dadosSocioDemograficos.nomeSocial" 
+                    />
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label class="required">Cartão SUS</label>
+                    <input type="text" 
+                           class="form-control" 
+                           name="cartaoSus" 
+                           placeholder="Número do Cartão do SUS" 
+                           [(ngModel)]="paciente.numeroCartaoSus"
+                    />
+                            
+                    <div class="invalid-feedback">
+                        <i class="oi oi-warning"></i>
+                        <span>{{paciente.numeroCartaoSus}}</span>
+                    </div>			  				   
+                </div>
+                
+                <div class="form-group col-md-4">
+                    <label class="required">CPF</label>
+                    <input type="text" 
+                           class="form-control" 
+                           name="cpf" 
+                           placeholder="CPF" 
+                           [(ngModel)]="paciente.pessoa.cpf"
+                           mask="000.000.000-00" 
+                    />
+                            
+                    <div class="invalid-feedback">
+                        <i class="oi oi-warning"></i>
+                        <span>{{paciente.pessoa.cpf}}</span>
+                    </div>			  				   
+                </div>
+                
+                <div class="form-group col-md-3">
+                    <label class="required">Data de Nascimento</label>
+                    <input type="text" 
+                           class="form-control" 
+                           placeholder="Data de Nascimento" 
+                           name="dataNascimento" 
+                           (blur)="calcularIdade(paciente.pessoa.dataNascimento)"
+                           [(ngModel)]="paciente.pessoa.dataNascimento"
+                           mask="00/00/0000" />
+
+                    <div class="invalid-feedback">
+                        <i class="oi oi-warning"></i>
+                        <span>{{paciente.pessoa.dataNascimento}}</span>
+                    </div>			      			   
+                </div>
+
+                <div class="form-group col-md-1">
+                    <label>Idade</label>
+                    <input type="number" 
+                           class="form-control" 
+                           name="idade"
+                           placeholder="Idade" 
+                           readonly="readonly"
+                           [(ngModel)]="paciente.idade"/>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                <label class="required" for="racaCor">Raça/Cor</label>
+                <select name="racaCor" 
+                        class="form-control"
+                        [(ngModel)]="paciente.dadosSocioDemograficos.racaCor">
+                    <option *ngFor="let racaCor of enumRacasCor"
+                            [value]="racaCor.value"
+                            [text]="racaCor.text">
+                    </option>
+                </select>
+                
+                <div class="invalid-feedback">
+                    <i class="oi oi-warning"></i>
+                    <span>{{paciente.dadosSocioDemograficos.racaCor}}</span>
+                </div>						
+            </div>
+            <div class="form-group col-md 2">
+                <label class="required" for="escolaridade">Escolaridade</label>
+                <select name="escolaridade" 
+                        class="form-control" 
+                        [(ngModel)]="paciente.dadosSocioDemograficos.escolaridade">
+                    <option *ngFor="let escolaridade of enumEscolaridade"
+                            [value]="escolaridade.value"
+                            [text]="escolaridade.text">
+                    </option>
+                </select>
+                
+                <div class="invalid-feedback">
+                    <i class="oi oi-warning"></i>
+                    <span>{{paciente.dadosSocioDemograficos.escolaridade}}</span>
+                </div>						
+            </div>
+            <div class="form-group col-md 2">
+                <label class="required" for="Estado Civil">Estado Civil</label>
+                <select name="estadoCivil" 
+                        class="form-control" 
+                        [(ngModel)]="paciente.dadosSocioDemograficos.estadoCivil">
+                    <option *ngFor="let estadoCivil of enumEstadoCivil"
+                            [value]="estadoCivil.value"
+                            [text]="estadoCivil.text">
+                    </option>
+                </select>
+                
+                <div class="invalid-feedback">
+                    <i class="oi oi-warning"></i>
+                    <span>{{paciente.dadosSocioDemograficos.estadoCivil}}</span>
+                </div>						
+            </div>
+            <div class="form-group col-md 2">
+                <label class="required" for="Estado Civil">Orientação Sexual</label>
+                <select name="orientacaoSexual" 
+                        class="form-control"
+                        [(ngModel)]="paciente.dadosSocioDemograficos.orientacaoSexual">
+                    <option *ngFor="let orientacaoSexual of enumOrientacaoSexual"
+                            [value]="orientacaoSexual.value"
+                            [text]="orientacaoSexual.text">
+                    </option>
+                </select>
+                
+                <div class="invalid-feedback">
+                    <i class="oi oi-warning"></i>
+                    <span>{{paciente.dadosSocioDemograficos.orientacaoSexual}}</span>
+                </div>						
+            </div>		
+            
+            <div class="form-group col-md-2">
+                <label for="qualOrientacaoSexual">Qual?</label>
+                <input class="form-control"
+                       id="qualOrientacaoSexual"
+                       name="qualOrientacaoSexual" 
+                       placeholder="Qual outra orientação sexual" 
+                       type="text" 
+                       [(ngModel)]="paciente.dadosSocioDemograficos.qualOrientacaoSexual"
+                       readonly="true" />
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label for="Telefone">Telefone</label>
+                <input class="form-control" 
+                       name="telefone" 
+                       placeholder="Telefone" 
+                       type="tel"                        
+                       [(ngModel)]="paciente.pessoa.telefone"
+                       onkeypress="$(this).mask('(00) 00000-0000');"/>
+            </div>
+
+            <div class="form-group col-md-3">
+                <label for="nome">E-mail</label>
+                <input type="email" 
+                       class="form-control" 
+                       name="email" 
+                       placeholder="E-mail" 
+                       autofocus="autofocus"
+                       [(ngModel)]="paciente.pessoa.email"/>
+            </div>
+
+            <div class="form-group col-md-3">
+                <label class="required" for="nome">Ocupação Atual</label>
+                <input type="text" 
+                       class="form-control" 
+                       name="acupacaoAtual" 
+                       placeholder="Ocupação Atual" 
+                       autofocus="autofocus"
+                       [(ngModel)]="paciente.dadosSocioDemograficos.ocupacaoAtual"/>
+                        
+                <div class="invalid-feedback">
+                    <i class="oi oi-warning"></i>
+                    <span>{{paciente.dadosSocioDemograficos.ocupacaoAtual}}</span>
+                </div>				               
+            </div>
+            
+            <div class="form-group col-md-3">
+                <label class="required" for="nome">Nome da Mãe</label>
+                <input th:type="text" 
+                       class="form-control" 
+                       name="nomeMae" 
+                       placeholder="Nome da Mãe" 
+                       autofocus="autofocus"
+                       [(ngModel)]="paciente.dadosSocioDemograficos.nomeMae"/>
+                        
+                <div class="invalid-feedback">
+                    <i class="oi oi-warning"></i>
+                    <span>{{paciente.dadosSocioDemograficos.nomeMae}}</span>
+                </div>				               
+            </div>
+        </div>    
+        
+        <hr>
+        
+        <div class="form-row">
+            <div class="form-group col-md-2">					
+                <label for="cep">CEP</label>
+                <input class="form-control" 
+                       name="cep" 
+                       placeholder="CEP" 
+                       type="text" 
+                       onkeypress="$(this).mask('00.000-000');"
+                       (blur)="onBlurCep()"
+                       [(ngModel)]="paciente.endereco.cep"/>
+            </div>
+            
+            <div class="form-group col-md-5">	
+                <label class="required" for="logradouro">Logradouro</label>
+                <input class="form-control" 
+                       name="logradouro" 
+                       placeholder="Logradouro" 
+                       type="text"
+                       [(ngModel)]="paciente.endereco.logradouro"/>
+                        
+                <div class="invalid-feedback">
+                    <i class="oi oi-warning"></i>
+                    <span>{{paciente.endereco.logradouro}}</span>
+                </div>							   
+            </div>
+            
+            <div class="form-group col-md-1">
+                <label class="required" for="numero">Número</label>
+                <input class="form-control" 
+                       name="numero" 
+                       placeholder="Número" 
+                       type="text"
+                       [(ngModel)]="paciente.endereco.numero"/>
+                        
+                <div class="invalid-feedback">
+                    <i class="oi oi-warning"></i>
+                    <span>{{paciente.endereco.numero}}</span>
+                </div>							   
+            </div>	
+            
+            <div class="form-group col-md-4">
+                <label for="complemento">Complemento</label>
+                <input class="form-control" 
+                       name="complemento" 
+                       placeholder="Complemento" 
+                       type="text" 
+                       [(ngModel)]="paciente.endereco.complemento"/>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-5">
+                <label class="required" for="bairro">Bairro</label>
+                <input class="form-control" 
+                       name="bairro" 
+                       placeholder="Bairro" 
+                       type="text" 
+                       [(ngModel)]="paciente.endereco.bairro"/>
+                        
+                <div class="invalid-feedback">
+                    <i class="oi oi-warning"></i>
+                    <span>{{paciente.endereco.bairro}}</span>
+                </div>							   
+            </div>				
+
+            <div class="form-group col-md-5">	
+                <label class="required" for="cidade">Cidade</label>
+                <input class="form-control" 
+                       name="cidade" 
+                       placeholder="Cidade" 
+                       type="text" 
+                       [(ngModel)]="paciente.endereco.localidade"/>
+                        
+                <div class="invalid-feedback">
+                    <i class="oi oi-warning"></i>
+                    <span>{{paciente.endereco.localidade}}</span>
+                </div>							   
+            </div>
+        
+            <div class="form-group col-md-2">
+                <label class="required" for="uf">UF</label>
+                <input class="form-control" 
+                       name="uf" 
+                       placeholder="Estado" 
+                       type="text" 
+                       [(ngModel)]="paciente.endereco.uf"/>
+                        
+                <div class="invalid-feedback">
+                    <i class="oi oi-warning"></i>
+                    <span>{{paciente.endereco.uf}}</span>
+                </div>							   
+            </div>	
+        </div>
+
+        <hr>
+
+        <button type="submit" 
+                class="btn btn-outline-dark" 
+                *ngIf="!paciente.id">
+                <span class="oi oi-check"></span>
+                <span>Salvar</span>
+        </button>
+        <button type="submit" 
+                class="btn btn-outline-dark" 
+                *ngIf="paciente.id">
+                <span class="oi oi-check"></span>
+                <span>Atualizar</span>
+        </button>
+    </form>		
+</div>
+
+<script th:src="@{/js/paciente/paciente.js}"></script>
+
+<script type="text/javascript">
+    if (document.getElementById('orientacaoSexual').value == 'Outro') {
+        document.getElementById("qualOrientacaoSexual").readOnly = false;
+    } else {
+        document.getElementById("qualOrientacaoSexual").readOnly = true;
+    }	
+</script>

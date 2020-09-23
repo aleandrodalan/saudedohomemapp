@@ -1,0 +1,23 @@
+div#externa {
+    width: 100%;
+    height: 100%;
+    display: table;
+}
+
+div#interna {
+    text-align: center;
+    vertical-align: middle;
+    align-items: center;
+    display: table-cell;
+    background-image: url('../../assets/images/saudedohomem_2.jpg');
+    background-size: 100%;
+    background-position: center;
+}
+
+div#conteudo {
+    border: transparent;
+    display: inline-block;
+    width: 400px;
+    height: 430px;
+    background: transparent;
+}

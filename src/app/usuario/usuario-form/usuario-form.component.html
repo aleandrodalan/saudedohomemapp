@@ -1,0 +1,210 @@
+<nav class="navbar navbar-expand-md navbar-top">
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <h4 class="text-dark">
+                    <i class="oi oi-pencil"></i> 
+                    <label>Cadastro de Usuários</label>
+                </h4>		            
+            </li>
+        </ul>
+    </div>
+    
+    <a class="btn btn-outline-dark" routerLink="/usuarios/lista" role="button">
+        <span class="oi oi-document" title="Cadastro" aria-hidden="true"></span>
+        <span>Listar Usuários</span>
+    </a>
+</nav>
+
+<div class="container" id="cadastro" style="padding-bottom: 20px;">
+
+    <hr />
+    
+    <form method="POST" (ngSubmit)="onSubmit()" #formulario="ngForm">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success" role="alert" *ngIf="success == true">
+                    Usuário salvo com sucesso!
+                </div>
+
+                <div class="alert alert-danger" role="alert" *ngFor="let erro of errors">
+                    {{erro}}
+                </div>                
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6" [ngClass]="{'has-error': !nomeModel.valid}">
+                <label class="required" for="nome">Nome</label>
+                <input type="text" 
+                    class="form-control"
+                    placeholder="Nome" 
+                    autofocus="autofocus"
+                    id="nome" 
+                    name="nome"
+                    #nomeModel="ngModel"
+                    [(ngModel)]="usuario.pessoa.nome"
+                    required >
+            <!--
+                <div *ngIf="nomeModel.errors">
+                    <i class="oi oi-warning"></i>
+                    <span>{{nomeModel.errors.required}}</span>
+                </div>
+            -->				               
+            </div>
+            
+            <div class="form-group col-md-3">
+                    <label for="cpf">CPF</label>
+                    <input type="text" 
+                           class="form-control"
+                           mask="000.000.000-00"
+                           data-mask-reverse="true" 
+                           name="cpf" 
+                           placeholder="CPF"
+                           [(ngModel)]="usuario.pessoa.cpf"
+                    />
+                            
+                <div class="invalid-feedback">
+                    <i class="oi oi-warning"></i>
+                    <span>{{usuario.pessoa.cpf}}</span>
+                </div>				               
+            </div>
+            
+            <div class="form-group col-md-3">
+                <label class="required" for="dataNascimento">Data de nascimento</label>
+                <input type="text" 
+                       class="form-control" 
+                       name="dataNascimento" 
+                       placeholder="Data de Nascimento" 
+                       mask="00/00/0000"
+                       [(ngModel)]="usuario.pessoa.dataNascimento"
+                />
+                        
+                <div class="invalid-feedback">
+                    <i class="oi oi-warning"></i>
+                    <span>{{usuario.pessoa.dataNascimento}}</span>
+                </div>			      			   
+            </div>
+        </div>	
+
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="telefone">Telefone</label>
+                <input type="text" 
+                       class="form-control"
+                       data-mask-reverse="true" 
+                       name="telefone" 
+                       mask="(00) 00000-0000"
+                       placeholder="Telefone"
+                       [(ngModel)]="usuario.pessoa.telefone" />
+            </div>
+            
+            <div class="form-group col-md-8">
+                <label for="email">E-mail</label>
+                <input type="text" 
+                       class="form-control"
+                       data-mask-reverse="true" 
+                       name="email" 
+                       placeholder="E-mail"
+                       [(ngModel)]="usuario.pessoa.email"
+                />
+
+                <div class="invalid-feedback">
+                    <i class="oi oi-warning"></i>
+                    <span>{{usuario.pessoa.email}}</span>
+                </div>			      			   
+            </div>
+        </div>	
+
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label class="required" for="login">Login</label>
+                <input type="text" 
+                       class="form-control" 
+                       name="login" 
+                       placeholder="Login" 
+                       [(ngModel)]="usuario.login"
+                />
+                        
+                <div class="invalid-feedback">
+                    <i class="oi oi-warning"></i>
+                    <span>{{usuario.login}}</span>
+                </div>
+            </div>
+        
+            <div class="form-group col-md-4">
+                <label class="required" for="senha">Senha</label>
+                <input type="password" 
+                       class="form-control" 
+                       name="senha" 
+                       placeholder="Senha" 
+                       [(ngModel)]="usuario.senha"
+                />
+            </div>
+            
+            <div class="form-group col-md-4">
+                <label class="required" for="repetirSenha">Repetir a Senha</label>
+                <input type="password" 
+                       class="form-control" 
+                       name="repetirSenha" 
+                       placeholder="Repetir a Senha" 
+                       [(ngModel)]="usuario.repetirSenha"
+                />
+            </div>				    
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label class="required" for="status">Grupo de Acesso</label>
+                <select name="grupo" 
+                        class="form-control" 
+                        [(ngModel)]="usuario.grupo">
+                    <option>Selecione...</option>
+                    <option *ngFor="let grupo of enumGrupos"
+                            [value]="grupo.value"
+                            [text]="grupo.text">
+                    </option>
+                </select>
+                
+                <div class="invalid-feedback">
+                    <i class="oi oi-warning"></i>
+<!--                    <span th:errors="*{grupo}"></span> -->
+                </div>			      			   
+            </div>
+                            
+            <div class="form-group col-md-2">
+                <label class="required" for="status">Status</label>
+                <select name="status" 
+                        class="form-control" 
+                        [(ngModel)]="usuario.status">
+                    <option value="">Selecione...</option>    
+                    <option *ngFor="let status of enumStatus"
+                        [value]="status.value"
+                        [text]="status.text">
+                    </option>
+                </select>
+                
+                <div class="invalid-feedback">
+                    <i class="oi oi-warning"></i>
+<!--                    <span th:errors="*{status}"></span> -->
+                </div>			      			   
+            </div>
+        </div>	
+                            
+        <hr />
+            
+<!--        <input type="hidden" id="id" th:field="*{id}"/> -->
+        <button type="submit" 
+                class="btn btn-outline-dark" 
+                *ngIf="!usuario.id">
+            <span class="oi oi-check"></span>
+            <span>Salvar</span>
+        </button>
+        <button type="submit" 
+                class="btn btn-outline-dark" 
+                *ngIf="usuario.id">
+            <span class="oi oi-check"></span>
+            <span>Atualizar</span>
+        </button>        
+    </form>		
+</div>

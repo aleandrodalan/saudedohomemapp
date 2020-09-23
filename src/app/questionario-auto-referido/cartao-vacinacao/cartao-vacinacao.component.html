@@ -1,0 +1,64 @@
+<div>
+    <div>
+        <strong><span>Possui Cartão de Vacinação?</span></strong>				  		
+    </div>
+
+    <input type="radio" 
+           id="opcaoVacinacao" 
+           name="opcaoVacinacao"
+           [value]="true"
+           [(ngModel)]="cartaoVacinacao.possuiCartao" />
+    <span>Sim</span>
+
+    <input type="radio" 
+           id="opcaoVacinacao" 
+           name="opcaoVacinacao" 
+           (click)="marcarNao()"
+           [value]="false"
+           [(ngModel)]="cartaoVacinacao.possuiCartao" />
+    <span>Não</span>
+</div>			  		
+
+<div id="divVacinacao" *ngIf="cartaoVacinacao.possuiCartao == true">
+    <div>
+        <strong><span>Situação do Cartão de Vacinação:</span></strong>
+    </div>
+    <div>
+        <input type="checkbox" 
+               id="opcaoHepatiteB" 
+               name="hepatiteB" 
+               [(ngModel)]="cartaoVacinacao.vacinouHepatiteB" />
+        <span>Hepatite B</span>
+    </div>
+    <div>		
+        <input type="checkbox" 
+               id="opcaoDT" 
+               name="dT" 
+               [(ngModel)]="cartaoVacinacao.vacinouDT" />
+        <span>dT</span>
+    </div>
+    <div>
+        <input type="checkbox" 
+               id="opcaoFebreAmarela" 
+               name="febreAmarela" 
+               [(ngModel)]="cartaoVacinacao.vacinouFebreAmarela" />
+        <span>Febre Amarela</span>
+    </div>
+    <div>	
+        <input type="checkbox" 
+               id="opcaoTripliceViral" 
+               name="tripliceViral" 
+               [(ngModel)]="cartaoVacinacao.vacinouTripliceViral" />
+        <span>Tríplice Viral</span>			  			
+    </div>
+    <div>				  			
+        <input type="checkbox" 
+               id="opcaoGripe" 
+               name="gripe" 
+               [(ngModel)]="cartaoVacinacao.vacinouGripeSessentaAnos" />
+        <span>Gripe - 60 anos ou mais</span>
+    </div>
+    <div>
+        <span>* marcar qual deve ser atualizada</span>
+    </div>				  						  			
+</div>

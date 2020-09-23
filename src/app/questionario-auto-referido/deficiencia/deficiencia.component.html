@@ -1,0 +1,66 @@
+<div>
+    <div>
+        <strong><span>Tem algum tipo de deficiência?</span></strong>				  		
+    </div>
+    <div>
+        <input type="radio" 
+               name="opcaoDeficiencia"
+               [value]="true" 
+               [(ngModel)]="deficiencia.possuiDeficiencia">
+        <span>Sim</span>
+
+        <input type="radio" 
+               name="opcaoDeficiencia" 
+               (click)="marcarNao()"
+               [value]="false" 
+               [(ngModel)]="deficiencia.possuiDeficiencia">
+        <span>Não</span>
+    </div>
+</div>
+<div id="divDeficiencia" *ngIf="deficiencia.possuiDeficiencia == true">
+    <div>
+        <label>Qual?</label>
+    </div>
+    <div>
+        <div>
+            <input type="radio" 
+                   id="opcaoTipoDeficiencia"
+                   name="opcaoTipoDeficiencia"
+                   value="VISUAL"
+                   [(ngModel)]="deficiencia.tipoDeficienciaEnum" />
+            <span>Visual</span>
+        </div>
+        <div>
+            <input type="radio" 
+                   id="opcaoTipoDeficiencia" 
+                   name="opcaoTipoDeficiencia"
+                   value="AUDITIVA" 
+                   [(ngModel)]="deficiencia.tipoDeficienciaEnum" />
+            <span>Auditiva</span>
+        </div>
+        <div>
+            <input type="radio" 
+                   id="opcaoTipoDeficiencia" 
+                   name="opcaoTipoDeficiencia"
+                   value="MENTAL" 
+                   [(ngModel)]="deficiencia.tipoDeficienciaEnum" />
+            <span>Mental</span>
+        </div>
+        <div>
+            <input type="radio" 
+                   id="opcaoTipoDeficiencia" 
+                   name="opcaoTipoDeficiencia"
+                   value="FISICA" 
+                   [(ngModel)]="deficiencia.tipoDeficienciaEnum" />
+            <span>Física</span>
+        </div>
+        <div>
+            <input type="radio" 
+                   id="opcaoTipoDeficiencia" 
+                   name="opcaoTipoDeficiencia"
+                   value="MULTIPLA" 
+                   [(ngModel)]="deficiencia.tipoDeficienciaEnum" />
+            <span>Múltipla</span>
+        </div>			  							  				
+    </div>
+</div>

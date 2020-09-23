@@ -1,0 +1,98 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~open-iconic/font/css/open-iconic-bootstrap.min.css";
+
+/*
+ * Base structure
+ */
+html, body {
+	height: 100%;
+}
+
+label {
+	font-weight: bold;
+	padding-top: 5px;
+}
+
+span {
+	padding-left: 4px;
+	padding-right: 4px;
+}
+
+body {
+	padding-top: 0;
+	padding-left: 0;
+} 
+
+/*
+ * main layout
+ */
+.layout-main {
+    display: flex;
+    min-height: calc(100vh - 52px);
+	overflow: hidden;
+}
+
+/*
+ * Content
+ */
+.layout-content {
+    width: 100%;
+	padding-top: 0px;
+}
+
+.container {
+	width: 100%;
+	padding-top: 20px;
+}
+
+/*
+ * nav-pills home
+ */
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+	color: #fff;
+	background-color: #1e94d2;
+}
+
+/*
+ * toogle do navbar do menu
+ */ 
+
+.navbar-toggle {
+    display: none;    
+    margin-left: 10px;
+}
+
+/*
+ * Footer
+ */
+
+footer {
+	height: 10px;
+	font-size: 92%;
+ 	display: block;
+ 	color: #000000;
+ 	text-align: center; 
+ 	left: 0;
+ 	right: 0;
+ 	bottom: 0;
+ 	margin: 0;
+ 	border-top: 1px solid #dddddd; 	
+}
+
+.sidebar {
+	background-image: linear-gradient(45deg, #1f4037, #2C5364);
+}
+
+label.required:after { 
+	content: " *"; 
+	color: red; 
+}
+html, body { 
+	height: 100%; 
+}
+
+body { 
+	margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
+}

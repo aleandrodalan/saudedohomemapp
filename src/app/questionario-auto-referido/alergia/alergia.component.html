@@ -1,0 +1,88 @@
+<div>
+    <div>
+        <strong><span>Tem algum tipo de alergia?</span></strong>				  		
+    </div>
+    <div>
+        <input type="radio" 
+               id="opcaoAlergiaSim" 
+               [value]="true"
+               name="opcaoAlergia"	
+               [(ngModel)]="alergia.possuiAlergia" />
+        <span>Sim</span>
+
+        <input type="radio" 
+               id="opcaoAlergiaNao" 
+               name="opcaoAlergia"
+               (click)="marcarNao()"
+               [value]="false"
+               [(ngModel)]="alergia.possuiAlergia" />
+        <span>Não</span>
+    </div>
+</div>
+<div id="divAlergia" *ngIf="alergia.possuiAlergia == true">
+    <div>
+        <strong><span>Qual?</span></strong>
+    </div>
+    <div>
+        <div>
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()"
+                   id="alergialergiaMedicamentos" 
+                   name="alergiaMedicamentos"
+                   [(ngModel)]="alergia.alergiaMedicamentos" />
+            <span>Medicamentos</span>
+        </div>
+        <div>			  				
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()"            
+                   id="alergiaAsma" 
+                   name="alergiaAsma"
+                   [(ngModel)]="alergia.alergiaAsma" />
+            <span>Asma</span>
+        </div>
+        <div>
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()"
+                   id="alergiaRinite" 
+                   name="alergiaRinite"
+                   [(ngModel)]="alergia.alergiaRinite" />
+            <span>Rinite</span>
+        </div>
+        <div>
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()"            
+                   id="alergiaAlimentar" 
+                   name="alergiaAlimentar"
+                   [(ngModel)]="alergia.alergiaAlimentar" />
+            <span>Alimentar</span>
+        </div>
+        <div>
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()"            
+                   id="alergiaAnimais" 
+                   name="alergiaAnimais"
+                   [(ngModel)]="alergia.alergiaAnimais" />
+            <span>Animais</span>
+        </div>
+        <div>
+            <input type="checkbox" 
+                   (click)="desmarcarOutro()"            
+                   id="alergiaOutra" 
+                   name="alergiaOutra" 
+                   (click)="marcarOutro()"
+                   [(ngModel)]="alergia.alergiaOutra" />
+            <span>Outra</span>
+        </div>
+        <div *ngIf="alergia.alergiaOutra == true">
+            <div>	
+                <strong><span>Qual outra?</span></strong>
+            </div>
+            <div>
+                <input id="alergiaQual" 
+                       type="text" 
+                       name="alergiaQual"
+                       [(ngModel)]="alergia.qualOutraAlergia" />
+            </div>
+        </div>
+    </div>
+</div>

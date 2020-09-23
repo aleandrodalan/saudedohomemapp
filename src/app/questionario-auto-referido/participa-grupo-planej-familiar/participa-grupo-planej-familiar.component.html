@@ -1,0 +1,39 @@
+<div>
+    <strong><span>Participa de algum grupo de Planejamento Familiar?</span></strong>				  		
+</div>
+<div>
+    <input type="radio" 
+           id="opcaoFamiliarSim"
+           name="opcaoFamiliar"
+           (click)="marcarSim()"
+           [value]="true"
+           [(ngModel)]="participaGrupoPlanejFamiliar.participaPlanejamentoFamiliar" >
+    <span>Sim</span>
+
+    <input type="radio" 
+           id="opcaoFamiliarNao" 
+           name="opcaoFamiliar"
+           [value]="false" 
+           [(ngModel)]="participaGrupoPlanejFamiliar.participaPlanejamentoFamiliar" >
+    <span>Não</span>
+</div>
+<div id="divInteressePlanejamentoFamiliar" *ngIf="participaGrupoPlanejFamiliar.participaPlanejamentoFamiliar == false">
+    <strong><span>Tem interesse?</span></strong>				  		
+    
+    <div>
+        <input type="radio" 
+               id="opcaoInteresse" 
+               name="opcaoInteresse"
+               [value]="true" 
+               [(ngModel)]="participaGrupoPlanejFamiliar.temInteressePlanFamiliar" >
+        <span>Sim</span>
+    </div>
+    <div>					
+        <input type="radio" 
+               id="opcaoInteresse" 
+               name="opcaoInteresse"               
+               [value]="false" 
+               [(ngModel)]="participaGrupoPlanejFamiliar.temInteressePlanFamiliar" >
+        <span>Não</span>
+    </div>
+</div>

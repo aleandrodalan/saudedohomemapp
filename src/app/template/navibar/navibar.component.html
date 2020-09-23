@@ -1,0 +1,42 @@
+<nav id="navbar" class="navbar navbar-light">
+    <div class="form-row" id="navbarNav">
+        <a class="btn btn-outline-light border-0" routerLink="/home">
+            <i class="oi oi-home"></i> 
+            <strong><span> Início</span></strong>
+        </a>
+        
+        <a class="btn btn-outline-light border-0"
+           routerLink="/unidades_saude"> 
+            <i class="oi oi-medical-cross"></i> 
+            <strong><span> Unidades de Saúde</span></strong>
+        </a>			
+        
+        <a class="btn btn-outline-light border-0" 
+           routerLink="/pacientes">
+            <i class="oi oi-people"></i> 
+            <strong><span> Pacientes</span></strong>
+        </a>
+        
+        <a class="btn btn-outline-light border-0" 
+           routerLink="/prontuarios"> 
+            <i class="oi oi-book"></i> 
+            <strong><span> Prontuário</span></strong>
+        </a>			
+        
+        <a class="btn btn-outline-light border-0" 
+           routerLink="/usuarios" *ngIf="grupoAcesso == 'COORDENADOR'">
+            <i class="oi oi-key"></i> 
+            <strong><span> Usuário</span></strong>
+        </a>	
+
+        <form class="navbar-form navbar-right">
+            <button type="submit" 
+                    class="btn btn-outline-light border-0"
+                    (click)="logout()"
+                    routerLink="/" >
+                   <i class="oi oi-account-logout"></i>
+                   <strong><span> Sair</span></strong>
+            </button>
+        </form>       	
+    </div>
+</nav>
